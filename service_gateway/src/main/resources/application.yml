@@ -1,0 +1,50 @@
+server:
+  port: 8222
+
+spring:
+  application:
+    name: service-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: service-hosp
+          uri: lb://service-hosp
+          predicates:
+            - Path=/admin/hosp/**,/user/hosp/**,/user/schedule/** # 路径匹配
+        - id: service-cmn
+          uri: lb://service-cmn
+          predicates:
+            - Path=/admin/cmn/dict/**,/user/dict/** # 路径匹配
+
+        - id: service-user
+          uri: lb://service-user
+          predicates:
+            - Path=/user/info/**,/user/wx/**,/user/patient/**,/admin/userInfo/**,/user/schedule/** # 路径匹配
+
+        - id: service-sms
+          uri: lb://service-sms
+          predicates:
+            - Path=/user/sms/**
+
+        - id: service-oss
+          uri: lb://service-oss
+          predicates:
+            - Path=/user/oss/**
+
+        - id: service-order
+          uri: lb://service-order
+          predicates:
+            - Path=/user/order/**,/user/weipay/**
+
+        - id: service-statistics
+          uri: lb://service-statistics
+          predicates:
+            - Path=/admin/statistics/**
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+  profiles:
+    active: dev

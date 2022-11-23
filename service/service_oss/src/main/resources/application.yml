@@ -1,0 +1,17 @@
+server:
+  port: 8205
+spring:
+  application:
+    name: service-oss
+  profiles:
+    active: dev
+  servlet:
+    multipart:
+      max-file-size: 1024MB
+      max-request-size: 1024MB
+
+oss:
+  bucketname: shangyitongimage
+  endpoint: oss-cn-hangzhou.aliyuncs.com
+  keyid: LTAI5tN1kUoRJiEpABQ9Z5bt
+  keysecret: jkXGqQVzdpOP0PLreR1l28mHubP5Yl
